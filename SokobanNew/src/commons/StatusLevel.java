@@ -3,17 +3,20 @@ package commons;
 
 public class StatusLevel implements status{
 	private int countSteps;
-	//need to think if we need and how calc
-	private double grade;
+	private int time;
+	private double grade; //need to think if we need and how calc
+	
 	
 	//defilt C'tor
 	public StatusLevel() {
 		this.countSteps =0;
+		this.time=0;
 		this.grade=0;
 	}	
 	//C'tor
-	public StatusLevel(int countSteps,double grade) {
+	public StatusLevel(int countSteps,double grade, int time) {
 		this.setCountSteps(countSteps);
+		this.setTime(time);
 		this.setGrade(grade);
 	}
 	//copy c'tor
@@ -47,6 +50,12 @@ public class StatusLevel implements status{
 	}
 	public void setGrade(double grade) {
 		this.grade = grade;
+	}
+	public int getTime() {
+		return time;
+	}
+	public void setTime(int time) {
+		this.time = time;
 	}		
 
 

@@ -11,8 +11,7 @@ import controller.CommandExit;
 import controller.CommandLoad;
 import controller.CommandMove;
 import controller.CommandSave;
-import controller.iCommand;
-import controller.iCommand;
+import controller.generic.iCommand;
 
 
 public class CLI {

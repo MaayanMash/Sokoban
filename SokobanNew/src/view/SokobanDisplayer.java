@@ -13,6 +13,7 @@ public class SokobanDisplayer extends Canvas{
 	private char [][] sokobanData;
 	private StringProperty wallFileName;
 	private int cRow,cCol;
+	private int sokobanRow, sokobanCol;
 	private StringProperty playerFileName;
 	private StringProperty boxFileName;
 	private StringProperty boxOnTargetFileName;
@@ -33,11 +34,13 @@ public class SokobanDisplayer extends Canvas{
 	}
 	
 	public void redraw(){
+		System.out.println(sokobanCol);
+		System.out.println(sokobanRow);
 		if(this.sokobanData!=null){
 			double W = this.getWidth();
 			double H = this.getHeight();
-			double w = W/ this.sokobanData[0].length;
-			double h = H/ this.sokobanData.length;
+			double w = W/this.sokobanRow;
+			double h = H/ this.sokobanCol;
 			
 			GraphicsContext gc = getGraphicsContext2D();
 			//Images 
@@ -48,28 +51,24 @@ public class SokobanDisplayer extends Canvas{
 			Image target = null;
 			Image path =null;
 			
-			
 			try {
 				wall =new Image(new FileInputStream(wallFileName.get()));
-
-				//add now
 				player = new Image(new FileInputStream(playerFileName.get()));
 				box = new Image(new FileInputStream(boxFileName.get()));
 				boxOnTarget = new Image(new FileInputStream(boxOnTargetFileName.get()));
 				target = new Image(new FileInputStream(targetFileName.get()));
 				path = new Image(new FileInputStream(pathFileName.get()));
-				
-				
 			} catch (FileNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			//here we clean the canvas
 			gc.clearRect(0, 0, W, H);
-			
 			//here we drow again
-			for (int i = 0; i < sokobanData.length; i++) {
-				for (int j = 0; j < sokobanData[i].length; j++) {//here we can change to other to if '#' for wall in our program
+			System.out.println("row"+sokobanRow);
+			System.out.println("col"+sokobanCol);
+			for (int i = 0; i < sokobanRow; i++) {
+				for (int j = 0; j < sokobanCol; j++) {//here we can change to other to if '#' for wall in our program
 					//wall
 					if(sokobanData[i][j]=='#'){
 						if(wall==null)
@@ -92,19 +91,21 @@ public class SokobanDisplayer extends Canvas{
 					if(sokobanData[i][j]=='o'||sokobanData[i][j]=='O'||sokobanData[i][j]=='a'){
 						gc.drawImage(target, j*w, i*h, w, h);
 					}
+					//player
+					if(sokobanData[i][j]=='A'||sokobanData[i][j]=='a'){
+						gc.drawImage(player, j*w, i*h, w, h);
+					}
 					
 					else{
 						
 					}
 				}
+				System.out.println();
 			}
 			//player
-			gc.drawImage(player, cCol*w, cRow*h, w, h);
-			
-			
+			//setCharcterPos(sokobanData);
+			//gc.drawImage(player, cCol*w, cRow*h, w, h);
 		}
-		
-		
 	}
 
 	//set's and get's
@@ -149,6 +150,7 @@ public class SokobanDisplayer extends Canvas{
 
 	public void setSokobanData(char[][] sokobanData) {
 		this.sokobanData = sokobanData;
+		//setCharcterPos(sokobanData);
 		this.redraw();
 	}
 
@@ -158,12 +160,44 @@ public class SokobanDisplayer extends Canvas{
 	public int getcCol() {
 		return cCol;
 	}
-	
-	public void setCharcterPos(int cRow,int cCol){
+	public void setcRow(int cRow) {
 		this.cRow = cRow;
-		this.cCol = cCol;
-		redraw();
 	}
+
+	public void setcCol(int cCol) {
+		this.cCol = cCol;
+	}
+
+	public int getSokobanRow() {
+		return sokobanRow;
+	}
+
+	public void setSokobanRow(int sokobanRow) {
+		this.sokobanRow = sokobanRow;
+	}
+	public int getSokobanCol() {
+		return sokobanCol;
+	}
+
+	public void setSokobanCol(int sokobanCol) {
+		this.sokobanCol = sokobanCol;
+	}
+	
+	public void setCharcterPos(char[][] sokobanData){
+		for (int i=0; i<this.cRow; i++)
+			for (int j=0; j<this.cCol; j++)
+				if (sokobanData[i][j]=='a' || sokobanData[i][j]=='A')
+				{
+					this.cRow=i;
+					this.cCol=j;
+				}
+		//redraw();
+		
+	}
+
+
+
+
 
 
 	

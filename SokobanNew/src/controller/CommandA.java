@@ -1,5 +1,7 @@
 package controller;
 
+import controller.generic.iCommand;
+
 public abstract class CommandA implements iCommand {
 	
 	protected String params;

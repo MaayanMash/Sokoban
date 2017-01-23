@@ -4,6 +4,12 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.text.SimpleAttributeSet;
+
+import controller.generic.GenericController;
+import controller.generic.iCommand;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import model.iModel;
 import view.iView;
 
@@ -13,6 +19,7 @@ public class SokobanController implements Observer {
 	private iModel theModel;
 	private iView theView;
 	private HashMap<String, iCommand> hmCommands;
+	private StringProperty countSteps;
 	
 	//Ctor
 	public SokobanController(iModel model,iView view) {
@@ -22,6 +29,7 @@ public class SokobanController implements Observer {
 		hmCommands= new HashMap<String, iCommand>();
 		initHashMap();
 		gc.start();
+		this.countSteps=new SimpleStringProperty();
 	}
 	
 	private void initHashMap(){
@@ -47,14 +55,19 @@ public class SokobanController implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
-		String[] params={null,null};
-		iCommand cm = hmCommands.get(params[0]);
+		String[] input = ((String)arg).split(" ",2);
+		String commandName = input[0];
+		String params = null;	
+		if(input.length > 1)
+			params = input[1];
+		
+		iCommand cm = hmCommands.get(commandName);
 		if (cm==null)
 		{
 			theView.displayMassege("Command not found");
 			return;
 		}
-		cm.setParams(params[1]);
+		cm.setParams(params);
 		gc.insertCommand(cm);	
 	}
 	

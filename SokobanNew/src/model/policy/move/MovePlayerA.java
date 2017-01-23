@@ -63,11 +63,11 @@ public abstract class MovePlayerA implements iMovePlayer {
 			return null;
 		
 		//check if the level solved
-		if (TheLevel.ifSolved())
+		/*if (TheLevel.ifSolved())
 		{
 			System.out.println("The Level Solved!!");
 			System.out.println("Num of Steps: " + TheLevel.getCountSteps());
-		}
+		}*/
 		
 		return TheLevel;
 	}

@@ -29,7 +29,6 @@ public class SokobanModel extends Observable implements iModel{
 	private policy ThePolicy;
 	
 
-
 	//Def' cot'
 	public SokobanModel() {
 		TheLevel=null;
@@ -106,6 +105,12 @@ public class SokobanModel extends Observable implements iModel{
 		if(new MoveLeft(ThePolicy).movePlayer(TheLevel)!=null){
 			this.setChanged();
 			notifyObservers("DisplayLevel");
+		}
+		//check if the level solved
+		if (TheLevel.ifSolved())
+		{
+			this.setChanged();
+			notifyObservers("DisplayMassege The Level Solved!!");
 		}
 	}
 

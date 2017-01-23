@@ -13,14 +13,14 @@
 <?import javafx.scene.text.Font?>
  <?import view.SokobanDisplayer?>
 
-<BorderPane prefHeight="391.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
+<BorderPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainWindowController">
    <top>
       <MenuBar BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Load" />
-                  <MenuItem mnemonicParsing="false" text="Save" />
+                  <MenuItem mnemonicParsing="false" text="Load level" onAction="#openFile"/>
+                  <MenuItem mnemonicParsing="false" text="Save level"/>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -37,7 +37,7 @@
       </MenuBar>
    </top>
    <center>
-      <SokobanDisplayer fx:id="SokobanDisplayer" height="300.0" width="300.0" BorderPane.alignment="CENTER" wallFileName="./resources/wall.jpg" playerFileName="./resources/player.jpg" boxFileName="./resources/box.jpg" targetFileName="./resources/target.jpg" boxOnTargetFileName="./resources/box-on-target.jpg" pathFileName="./resources/path.jpg" />
+      <SokobanDisplayer fx:id="SokobanDisplayer" height="500.0" width="500.0" BorderPane.alignment="CENTER" wallFileName="./resources/wall.jpg" playerFileName="./resources/player.jpg" boxFileName="./resources/box.jpg" targetFileName="./resources/target.jpg" boxOnTargetFileName="./resources/box-on-target.jpg" pathFileName="./resources/path.jpg" />
    	  <BorderPane.margin>
           <Insets left="10.0" right="30.0" />
       </BorderPane.margin>
