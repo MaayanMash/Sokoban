@@ -29,7 +29,7 @@ public class Main extends Application
 			model.addObserver(sokobanController);
 			view.addObserver(sokobanController);	
 			
-			Scene scene = new Scene(root,900,700);
+			Scene scene = new Scene(root,800,600);
 			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
 			primaryStage.setScene(scene);
 			primaryStage.show();

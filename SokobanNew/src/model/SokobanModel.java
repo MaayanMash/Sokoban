@@ -252,6 +252,11 @@ public class SokobanModel extends Observable implements iModel{
 		
 		
 	}
+	@Override
+	public int getSteps() {
+		return TheLevel.getCountSteps();
+		
+	}
 
 
 

@@ -26,10 +26,11 @@ public class SokobanController implements Observer {
 		gc=new GenericController();
 		this.theModel=model;
 		this.theView=view;
+		this.countSteps=new SimpleStringProperty();
 		hmCommands= new HashMap<String, iCommand>();
 		initHashMap();
 		gc.start();
-		this.countSteps=new SimpleStringProperty();
+		this.theView.createBindSteps(this.countSteps);
 	}
 	
 	private void initHashMap(){
@@ -42,7 +43,7 @@ public class SokobanController implements Observer {
 		CommandDisplayLevel cd = new CommandDisplayLevel(theView, theModel);
 		this.hmCommands.put("DisplayLevel", cd);
 		this.hmCommands.put("displayLevel", cd);
-		CommandMove cm =new CommandMove(theModel);
+		CommandMove cm =new CommandMove(theModel, countSteps);
 		this.hmCommands.put("Move", cm);
 		this.hmCommands.put("move", cm);
 		CommandExit ce =new CommandExit(theView);

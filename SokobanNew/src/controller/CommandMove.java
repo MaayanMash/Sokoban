@@ -2,6 +2,7 @@ package controller;
 
 import java.util.HashMap;
 
+import javafx.beans.property.StringProperty;
 import model.iModel;
 
 
@@ -10,10 +11,12 @@ public class CommandMove extends CommandA{
 
 	private iModel model;
 	private HashMap<String,Runnable> hmMove;
+	private StringProperty countSteps;
 	
 	//C'tor
-	public CommandMove(iModel theModel) {
+	public CommandMove(iModel theModel, StringProperty countSteps) {
 		this.model=theModel;
+		this.countSteps = countSteps;
 		hmMove=new HashMap<String, Runnable>();
 		initHashMap();
 	}
@@ -61,6 +64,8 @@ public class CommandMove extends CommandA{
 	@Override
 	public void execute()  {
 		hmMove.get(params).run();
+		int steps= model.getSteps();
+		this.countSteps.set(""+(steps));
 	}
 
 }

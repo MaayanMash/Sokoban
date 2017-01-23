@@ -39,9 +39,9 @@ public class SokobanDisplayer extends Canvas{
 		if(this.sokobanData!=null){
 			double W = this.getWidth();
 			double H = this.getHeight();
-			double w = W/this.sokobanRow;
-			double h = H/ this.sokobanCol;
-			
+			double w = W/this.sokobanCol;
+			double h = H/ this.sokobanRow;
+
 			GraphicsContext gc = getGraphicsContext2D();
 			//Images 
 			Image wall = null;
@@ -65,8 +65,6 @@ public class SokobanDisplayer extends Canvas{
 			//here we clean the canvas
 			gc.clearRect(0, 0, W, H);
 			//here we drow again
-			System.out.println("row"+sokobanRow);
-			System.out.println("col"+sokobanCol);
 			for (int i = 0; i < sokobanRow; i++) {
 				for (int j = 0; j < sokobanCol; j++) {//here we can change to other to if '#' for wall in our program
 					//wall
