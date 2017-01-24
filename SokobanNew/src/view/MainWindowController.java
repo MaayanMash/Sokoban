@@ -39,6 +39,7 @@ public class MainWindowController extends Observable implements Initializable, i
 	private int countTime;
 	private StringProperty CounterTime;
 	private Timer timer;
+	private boolean time;
 	
 	//steps
 	@FXML private Text SokobanSteps;
@@ -52,6 +53,7 @@ public class MainWindowController extends Observable implements Initializable, i
 		this.CounterTime=new SimpleStringProperty();
 		this.musicString=new File("./resources/music/Game Music.mp3").toURI().toString();
 		this.player=new MediaPlayer(new javafx.scene.media.Media(musicString));
+		this.music=false;
 		this.music=false;
 	}
 	@Override
@@ -113,6 +115,7 @@ public class MainWindowController extends Observable implements Initializable, i
 	}
 	
 	public void startTimer() {
+		this.time=true;
 		this.countTime=0;
 		this.timer=new Timer();
 		SokobanTimer.textProperty().bind(this.CounterTime);
@@ -208,7 +211,9 @@ public class MainWindowController extends Observable implements Initializable, i
 		    notifyObservers("exit");
 		    Platform.exit();
 		} else {
-			continueTime();
+			if (time)
+				continueTime();
+			this.startStopMusic();
 		    alert.close();
 		}
 	}
