@@ -1,19 +1,19 @@
 package controller;
 
+import controller.generic.GenericController;
 import view.iView;
 
 public class CommandExit extends CommandA{
 
-	private iView view;
+	private GenericController gc;
 	
-	public CommandExit(iView theView) {
-		this.view=theView;
+	public CommandExit(GenericController gc) {
+		this.gc=gc;
 	}
 	
 	@Override
 	public void execute()  {
-		this.view.displayExit();
-		
+		this.gc.stop();
 	}
 
 }

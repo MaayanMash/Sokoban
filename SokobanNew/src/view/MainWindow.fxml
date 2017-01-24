@@ -20,8 +20,8 @@
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-                  <MenuItem mnemonicParsing="false" text="Load" onAction="#openFile"/>
-                  <MenuItem mnemonicParsing="false" text="Save" onAction="#saveFile" />
+                  <MenuItem mnemonicParsing="false" text="Load level" onAction="#openFile"/>
+                  <MenuItem mnemonicParsing="false" text="Save level" onAction="#saveFile" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
@@ -45,7 +45,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </VBox.margin>
                <font>
-                  <Font name="System Bold" size="12.0" />
+                  <Font name="System Bold Italic" size="12.0" />
                </font>
             </Button>
             <Button mnemonicParsing="false" text="Stop">
@@ -70,6 +70,9 @@
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
                   </Label>
                   <Text fx:id="SokobanTimer" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                      <HBox.margin>
@@ -84,6 +87,9 @@
                      <HBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </HBox.margin>
+                     <font>
+                        <Font name="System Italic" size="12.0" />
+                     </font>
                   </Label>
                   <Text fx:id="SokobanSteps" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
                      <HBox.margin>
@@ -105,4 +111,18 @@
    <padding>
       <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
    </padding>
+   <bottom>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="46.0" text="Exit" onAction="#displayExit">
+               <HBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </HBox.margin>
+               <font>
+                  <Font name="System Bold Italic" size="12.0" />
+               </font>
+            </Button>
+         </children>
+      </HBox>
+   </bottom>
 </BorderPane>

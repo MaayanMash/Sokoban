@@ -75,10 +75,7 @@ public abstract class LevelA implements level{
 	public double getGrade() {
 		return this.st.getGrade();
 	}
-	//@Override
-	//public long getTimeNow() {
-	//	return this.st.getTimeNow();
-	//}
+
 	@Override
 	public int getCountTargets() {
 		return this.targets.size();

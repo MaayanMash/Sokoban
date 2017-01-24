@@ -91,6 +91,7 @@ public class SokobanModel extends Observable implements iModel{
 			this.setChanged();
 			notifyObservers("DisplayLevel");
 		}
+		
 	}
 	@Override
 	public void moveLeft() {
@@ -106,13 +107,9 @@ public class SokobanModel extends Observable implements iModel{
 			this.setChanged();
 			notifyObservers("DisplayLevel");
 		}
-		//check if the level solved
-		if (TheLevel.ifSolved())
-		{
-			this.setChanged();
-			notifyObservers("DisplayMassege The Level Solved!!");
-		}
+
 	}
+
 
 	@Override
 	public void txtLevelLoad(String path)   {

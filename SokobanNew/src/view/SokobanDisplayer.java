@@ -12,13 +12,14 @@ public class SokobanDisplayer extends Canvas{
 	
 	private char [][] sokobanData;
 	private StringProperty wallFileName;
-	private int cRow,cCol;
 	private int sokobanRow, sokobanCol;
 	private StringProperty playerFileName;
 	private StringProperty boxFileName;
 	private StringProperty boxOnTargetFileName;
 	private StringProperty targetFileName;
 	private StringProperty pathFileName;
+	//if we want to use with getpos we need to change pos to twopoint
+	//private int cRow,cCol;
 	
 	//def Ctor
 	public SokobanDisplayer() {
@@ -28,14 +29,10 @@ public class SokobanDisplayer extends Canvas{
 		boxOnTargetFileName = new SimpleStringProperty();
 		targetFileName = new SimpleStringProperty();
 		pathFileName = new SimpleStringProperty();
-		//TODO need to change position's player
-		this.cRow=1;
-		this.cCol=1;
+
 	}
 	
 	public void redraw(){
-		System.out.println(sokobanCol);
-		System.out.println(sokobanRow);
 		if(this.sokobanData!=null){
 			double W = this.getWidth();
 			double H = this.getHeight();
@@ -93,16 +90,11 @@ public class SokobanDisplayer extends Canvas{
 					if(sokobanData[i][j]=='A'||sokobanData[i][j]=='a'){
 						gc.drawImage(player, j*w, i*h, w, h);
 					}
-					
 					else{
-						
 					}
 				}
 				System.out.println();
 			}
-			//player
-			//setCharcterPos(sokobanData);
-			//gc.drawImage(player, cCol*w, cRow*h, w, h);
 		}
 	}
 
@@ -148,10 +140,9 @@ public class SokobanDisplayer extends Canvas{
 
 	public void setSokobanData(char[][] sokobanData) {
 		this.sokobanData = sokobanData;
-		//setCharcterPos(sokobanData);
 		this.redraw();
 	}
-
+/*
 	public int getcRow() {
 		return cRow;
 	}
@@ -165,7 +156,7 @@ public class SokobanDisplayer extends Canvas{
 	public void setcCol(int cCol) {
 		this.cCol = cCol;
 	}
-
+*/
 	public int getSokobanRow() {
 		return sokobanRow;
 	}
@@ -181,6 +172,7 @@ public class SokobanDisplayer extends Canvas{
 		this.sokobanCol = sokobanCol;
 	}
 	
+	/*
 	public void setCharcterPos(char[][] sokobanData){
 		for (int i=0; i<this.cRow; i++)
 			for (int j=0; j<this.cCol; j++)
@@ -191,7 +183,7 @@ public class SokobanDisplayer extends Canvas{
 				}
 		//redraw();
 		
-	}
+	}*/
 
 
 

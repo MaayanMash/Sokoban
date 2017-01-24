@@ -46,7 +46,7 @@ public class SokobanController implements Observer {
 		CommandMove cm =new CommandMove(theModel, countSteps);
 		this.hmCommands.put("Move", cm);
 		this.hmCommands.put("move", cm);
-		CommandExit ce =new CommandExit(theView);
+		CommandExit ce =new CommandExit(gc);
 		this.hmCommands.put("exit", ce);
 		this.hmCommands.put("Exit", ce);
 		CommandDisplayMassege cdm = new CommandDisplayMassege(theView);
