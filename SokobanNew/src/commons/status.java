@@ -1,8 +1,7 @@
 package commons;
 
-import java.io.Serializable;
 
-public interface status extends Serializable{
+public interface status {
 	public status getStatus();
 	public int getCountSteps();
 	public double getGrade();

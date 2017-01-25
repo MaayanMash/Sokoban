@@ -62,10 +62,16 @@ public class CommandMove extends CommandA{
 	}
 
 	@Override
-	public void execute()  {
-		hmMove.get(params).run();
-		int steps= model.getSteps();
-		this.countSteps.set(""+(steps));
+	public void execute() {
+		int steps;
+		Runnable run=hmMove.get(params);
+		if (run==null)
+			model.error();
+		else{
+			run.run();
+			steps= model.getSteps();
+			this.countSteps.set(""+(steps));
+		}
 	}
 
 }

@@ -1,8 +1,8 @@
 package commons;
 
-import java.io.Serializable;
 
-public interface position  extends Serializable{
+
+public interface position{
 	public position getPosition();
 	public boolean equalsPos(position pos);
 }

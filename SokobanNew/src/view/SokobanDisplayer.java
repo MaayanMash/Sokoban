@@ -36,8 +36,8 @@ public class SokobanDisplayer extends Canvas{
 		if(this.sokobanData!=null){
 			double W = this.getWidth();
 			double H = this.getHeight();
-			double w = W/this.sokobanCol;
-			double h = H/ this.sokobanRow;
+			double w = W/Math.max(sokobanCol, sokobanRow);
+			double h = H/ Math.max(sokobanCol, sokobanRow);
 
 			GraphicsContext gc = getGraphicsContext2D();
 			//Images 

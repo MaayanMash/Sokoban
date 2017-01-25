@@ -127,7 +127,7 @@ public class SokobanClientHandler extends Observable implements clientHandler {
 	
 	
 	//insert the String to queue
-	private void insertToQueue(String str){
+	public void insertToQueue(String str){
 		try {
 			this.ToClient.put(str);
 		} catch (InterruptedException e) {

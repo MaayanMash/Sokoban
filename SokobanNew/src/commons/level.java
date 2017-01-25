@@ -2,7 +2,7 @@ package commons;
 
 import java.io.Serializable;
 
-public interface level extends Serializable,status{
+public interface level extends status{
 
 	public int getCountTargets();
 	public int getCountBoxs();

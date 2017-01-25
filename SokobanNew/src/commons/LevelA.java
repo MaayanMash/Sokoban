@@ -1,24 +1,23 @@
 package commons;
 
 import java.io.Serializable;
-import java.lang.annotation.Target;
 import java.util.ArrayList;
 
-public abstract class LevelA implements level{
+public abstract class LevelA implements level, Serializable{
 	private status st;
 	protected Player player; 
 	private ArrayList<Box> boxs;
-	private ArrayList<commons.Target> targets;
+	private ArrayList<Target> targets;
 	 
 	//Def C'tor maybe we have problem here
 	public LevelA() {
 		this.st = new StatusLevel();
 		this.setPlayer(null);
 		this.boxs = new ArrayList<Box>();
-		this.targets = new ArrayList<commons.Target>();
+		this.targets = new ArrayList<Target>();
 	}	
 	//C'tor
-	public LevelA(status st,Player player, ArrayList<Box> boxs,ArrayList<commons.Target> targets) {
+	public LevelA(status st,Player player, ArrayList<Box> boxs,ArrayList<Target> targets) {
 		this.st = st;
 		this.setPlayer(player);
 		this.boxs = boxs ;
@@ -27,10 +26,10 @@ public abstract class LevelA implements level{
 	
 	//copy c'tor
 	public LevelA (LevelA level){
-		this.st=level.st;
-		this.player=level.player;
-		this.boxs=level.boxs;
-		this.targets=level.targets;
+		this.st=level.getStatus();
+		this.player=level.getPlayer();
+		this.boxs=level.getBoxs();
+		this.targets=level.geTargets();
 	}
 
 	//gets && sets
@@ -41,8 +40,9 @@ public abstract class LevelA implements level{
 	public ArrayList<Box> getBoxs(){
 		return this.boxs;
 	}
-	public ArrayList<commons.Target> geTargets(){
+	public ArrayList<Target> geTargets(){
 		return this.targets;
+
 	}	
 	public void setStatus(status st) {
 		this.st=st;
@@ -50,7 +50,7 @@ public abstract class LevelA implements level{
 	public void setBoxs (ArrayList<Box> boxs){
 		this.boxs=boxs;
 	}
-	public void setTargets (ArrayList<commons.Target> targets){
+	public void setTargets (ArrayList<Target> targets){
 		this.targets=targets;
 	}
 	public Player getPlayer() {
@@ -87,7 +87,7 @@ public abstract class LevelA implements level{
 	
 	@Override
 	public boolean ifSolved() {
-		if (this.getCountBoxOnTargets()==this.getCountTargets())
+		if (this.getCountBoxOnTargets()==this.getCountTargets()&&this.getCountTargets()!=0)
 			return true;
 		return false;
 	}

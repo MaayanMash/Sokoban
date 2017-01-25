@@ -1,12 +1,9 @@
 package model.data;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.OutputStream;
 
 import commons.Level2D;
 
@@ -17,7 +14,7 @@ public class MyObjectLevelLoader implements levelLoader {
 		
 		ObjectInputStream inO = new ObjectInputStream(new BufferedInputStream(in));
 		 Level2D l= (Level2D) inO.readObject();
-		 in.close();
+		 inO.close();
 		 System.out.println("the ObjFile loaded!");
 		return l;
 	}

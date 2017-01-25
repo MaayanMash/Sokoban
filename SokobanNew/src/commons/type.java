@@ -1,8 +1,7 @@
 package commons;
 
-import java.io.Serializable;
 
-public interface type extends Serializable{
+public interface type {
 	public String getType();
 	public char getC();
 	public position getPos();

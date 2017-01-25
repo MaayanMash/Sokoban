@@ -1,7 +1,8 @@
 package commons;
 
+import java.io.Serializable;
 
-public class TwoPoint  implements position{
+public class TwoPoint  implements position, Serializable{
 	private int x;
 	private int y;
 	

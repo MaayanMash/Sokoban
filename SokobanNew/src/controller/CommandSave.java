@@ -40,9 +40,13 @@ public class CommandSave extends CommandA {
 	
 	
 	@Override
-	public void execute() {
+	public void execute(){
 		String fileType=params.substring(params.length()-3);
-		hmSave.get(fileType).run();
+		Runnable run=hmSave.get(fileType);
+		if (run==null)
+			model.error();
+		else
+			run.run();
 	
 	}
 }

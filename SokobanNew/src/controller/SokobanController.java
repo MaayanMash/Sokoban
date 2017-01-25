@@ -68,7 +68,7 @@ public class SokobanController implements Observer {
 		CommandExit ce =new CommandExit(gc,theServer);
 		this.hmCommands.put("exit", ce);
 		this.hmCommands.put("Exit", ce);
-		CommandDisplayMassege cdm = new CommandDisplayMassege(theView);
+		CommandDisplayMassege cdm = new CommandDisplayMassege(theView, TheClientHendler);
 		this.hmCommands.put("DisplayMassege", cdm);
 		this.hmCommands.put("displayMassege", cdm);
 		CommandDisplayCli cmc= new CommandDisplayCli(theModel, TheClientHendler);
@@ -83,12 +83,11 @@ public class SokobanController implements Observer {
 		String params = null;	
 		if(input.length > 1)
 			params = input[1];
-		
 		iCommand cm = hmCommands.get(commandName);
 		if (cm==null)
 		{
-			theView.displayMassege("Command not found");
-			return;
+			cm=hmCommands.get("DisplayMassege");
+			params="Wrong input";
 		}
 		cm.setParams(params);
 		gc.insertCommand(cm);	

@@ -1,10 +1,11 @@
 package controller.generic;
 
+import java.util.Observable;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-public class GenericController {
+public class GenericController{
 	
 	private BlockingQueue<iCommand> commandQueue;
 	private boolean stop;
@@ -23,7 +24,7 @@ public class GenericController {
 					try {
 						iCommand cm=commandQueue.poll(1, TimeUnit.SECONDS);
 						if(cm!=null)
-							cm.execute();
+								cm.execute();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -36,7 +37,6 @@ public class GenericController {
 	public void stop(){
 		this.stop=true;
 	}
-	
 	
 	public void insertCommand(iCommand c){
 		try {

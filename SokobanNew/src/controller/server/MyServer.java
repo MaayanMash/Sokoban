@@ -10,7 +10,7 @@ public class MyServer {
 	
 	private int port;
 	private clientHandler clientHandler;
-	private volatile boolean stop; //What is volatile?
+	private volatile boolean stop; 
 	
 	public MyServer(int port, clientHandler clientHandler) {
 		
@@ -36,9 +36,7 @@ public class MyServer {
 				OutputStream outToClient = aClient.getOutputStream();
 			
 				this.clientHandler.handleClient(inFromUser, outToClient);
-
-				
-				
+		
 				inFromUser.close();
 				outToClient.close();
 				aClient.close();

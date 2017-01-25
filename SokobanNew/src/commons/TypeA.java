@@ -1,6 +1,8 @@
 package commons;
 
-public abstract class TypeA implements type {
+import java.io.Serializable;
+
+public abstract class TypeA  implements type, Serializable {
 	private char c;
 	private position pos;
 	

@@ -1,7 +1,8 @@
 package commons;
 
+import java.io.Serializable;
 
-public class StatusLevel implements status{
+public class StatusLevel implements status, Serializable{
 	private int countSteps;
 	private double grade; //need to think if we need and how calc
 	

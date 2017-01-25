@@ -3,15 +3,15 @@ package commons;
 
 import java.time.Clock;
 import java.util.ArrayList;
-
 import javax.swing.SingleSelectionModel;
+import commons.Target;
 
 
 public class Level2D extends LevelA {
 	private background[][] backG;
 	private moveAble[][] moveables;
 	private int sizeRow;
-	private int sizeCol;
+	private int sizeCol;	
 	
 	//De'f C'tor
 	public Level2D() {
@@ -28,6 +28,15 @@ public class Level2D extends LevelA {
 		this.setSizeCol(sizeCol);
 		this.backG = backG;
 		this.moveables = moveables;
+	}
+	
+	public Level2D(Level2D level)
+	{
+		super(level);
+		this.sizeRow= level.getSizeRow();
+		this.sizeCol=level.getSizeCol();
+		this.backG=level.getBackG();
+		this.moveables=level.getMoveables();
 	}
 		
 	//gets && sets
@@ -55,7 +64,6 @@ public class Level2D extends LevelA {
 	public void setMoveables(moveAble[][] moveables) {
 		this.moveables = moveables;
 	}
-	
 	
 	@Override
 	public int getCountBoxOnTargets() {
@@ -129,3 +137,4 @@ public class Level2D extends LevelA {
 		
 	}
 }
+

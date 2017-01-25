@@ -20,5 +20,7 @@ public interface iModel {
 	public void objLevelSave(String path);
 	public void xmlLevelSave(String path);
 	
+	public void error();
+	
 	public int getSteps();
 }

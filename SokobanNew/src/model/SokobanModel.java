@@ -10,6 +10,7 @@ import java.io.OutputStream;
 import java.util.Observable;
 
 import commons.Level2D;
+import commons.Target;
 import model.data.MyObjectLevelLoader;
 import model.data.MyObjectLevelSaver;
 import model.data.MyTextLevelLoader;
@@ -50,7 +51,7 @@ public class SokobanModel extends Observable implements iModel{
 		if(this.TheLevel==null)
 		{
 			this.setChanged();
-			this.notifyObservers("DisplayMassege the Levle is empty pleas load first");
+			this.notifyObservers("DisplayMassege the Levle is empty please load first");
 			return;
 		}
 		
@@ -65,7 +66,7 @@ public class SokobanModel extends Observable implements iModel{
 		if(this.TheLevel==null)
 		{
 			this.setChanged();
-			this.notifyObservers("DisplayMassege the Levle is empty pleas load first");
+			this.notifyObservers("DisplayMassege the Levle is empty please load first");
 			return;
 		}
 		
@@ -82,7 +83,7 @@ public class SokobanModel extends Observable implements iModel{
 		if(this.TheLevel==null)
 		{
 			this.setChanged();
-			this.notifyObservers("DisplayMassege the Levle is empty pleas load first");
+			this.notifyObservers("DisplayMassege the Levle is empty please load first");
 			return;
 		}
 		
@@ -98,7 +99,7 @@ public class SokobanModel extends Observable implements iModel{
 		if(this.TheLevel==null)
 		{
 			this.setChanged();
-			this.notifyObservers("DisplayMassege the Levle is empty pleas load first");
+			this.notifyObservers("DisplayMassege the Levle is empty please load first");
 			return;
 		}
 		
@@ -119,6 +120,7 @@ public class SokobanModel extends Observable implements iModel{
 		} catch (FileNotFoundException e) {
 			this.setChanged();
 			this.notifyObservers("DisplayMassege The file not found");
+			System.out.println("1");
 			return;
 		}
 		MyTextLevelLoader txtL=new MyTextLevelLoader();
@@ -167,6 +169,8 @@ public class SokobanModel extends Observable implements iModel{
 		MyXmlLevelLoader xmlL=new MyXmlLevelLoader();
 		try {
 			TheLevel=xmlL.loadLevel(in);
+			for(Target targets: TheLevel.geTargets())
+				System.out.println(targets);
 		} catch (IOException | ClassNotFoundException e) {
 			this.setChanged();
 			this.notifyObservers("DisplayMassege Wrong file input");
@@ -179,6 +183,12 @@ public class SokobanModel extends Observable implements iModel{
 	
 	@Override
 	public void txtLevelSave(String path) {
+		if(this.TheLevel==null)
+		{
+			this.setChanged();
+			this.notifyObservers("DisplayMassege the Levle is empty please load first");
+			return;
+		}
 		OutputStream out;
 		try {
 			out= new FileOutputStream(path);
@@ -203,6 +213,12 @@ public class SokobanModel extends Observable implements iModel{
 	}
 	@Override
 	public void objLevelSave(String path) {
+		if(this.TheLevel==null)
+		{
+			this.setChanged();
+			this.notifyObservers("DisplayMassege the Levle is empty please load first");
+			return;
+		}
 		OutputStream out;
 		try {
 			out= new FileOutputStream(path);
@@ -227,6 +243,12 @@ public class SokobanModel extends Observable implements iModel{
 	}	
 	@Override
 	public void xmlLevelSave(String path) {
+		if(this.TheLevel==null)
+		{
+			this.setChanged();
+			this.notifyObservers("DisplayMassege the Levle is empty please load first");
+			return;
+		}
 		OutputStream out;
 		try {
 			out= new FileOutputStream(path);
@@ -249,10 +271,16 @@ public class SokobanModel extends Observable implements iModel{
 		
 		
 	}
+	
 	@Override
 	public int getSteps() {
 		return TheLevel.getCountSteps();
 		
+	}
+	@Override
+	public void error() {
+		setChanged();
+		notifyObservers("DisplayMassege Wrong Input");
 	}
 
 

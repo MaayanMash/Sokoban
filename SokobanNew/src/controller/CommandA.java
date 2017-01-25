@@ -7,7 +7,7 @@ public abstract class CommandA implements iCommand {
 	protected String params;
 
 	@Override
-	public abstract void execute() ;
+	public abstract void execute() throws Exception;
 
 	@Override
 	public void setParams(String params) {

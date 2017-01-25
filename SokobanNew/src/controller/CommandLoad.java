@@ -4,6 +4,7 @@ package controller;
 import java.io.IOException;
 import java.util.HashMap;
 
+import controller.generic.iCommand;
 import model.iModel;
 
 
@@ -42,13 +43,16 @@ public class CommandLoad extends CommandA {
 	}
 	
 	@Override
-	public void execute() {
+	public void execute(){
 		String fileType=params.substring(params.length()-3);
-		hmLoader.get(fileType).run();	
+		Runnable run=hmLoader.get(fileType);
+		if (run==null)
+			model.error();
+		else
+			run.run();
 	}
-	
-
-
+		
+		
 
 
 }

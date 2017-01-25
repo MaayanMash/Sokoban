@@ -4,25 +4,25 @@
   <void property="down">
    <object class="java.lang.Enum" method="valueOf">
     <class>javafx.scene.input.KeyCode</class>
-    <string>Z</string>
+    <string>DOWN</string>
    </object>
   </void>
   <void property="left">
    <object class="java.lang.Enum" method="valueOf">
     <class>javafx.scene.input.KeyCode</class>
-    <string>A</string>
+    <string>LEFT</string>
    </object>
   </void>
   <void property="right">
    <object class="java.lang.Enum" method="valueOf">
     <class>javafx.scene.input.KeyCode</class>
-    <string>D</string>
+    <string>RIGHT</string>
    </object>
   </void>
   <void property="up">
    <object class="java.lang.Enum" method="valueOf">
     <class>javafx.scene.input.KeyCode</class>
-    <string>W</string>
+    <string>UP</string>
    </object>
   </void>
  </object>

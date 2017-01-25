@@ -56,6 +56,9 @@ public class MainWindowController extends Observable implements Initializable, i
 	private MediaPlayer player;
 	private boolean music;
 	
+	//CLI
+	private boolean fromCli;
+	
 	//Ctor'
 	public MainWindowController() {
 		this.CounterTime=new SimpleStringProperty();
@@ -63,12 +66,13 @@ public class MainWindowController extends Observable implements Initializable, i
 		this.player=new MediaPlayer(new javafx.scene.media.Media(musicString));
 		this.music=false;
 		this.music=false;
+		this.fromCli=false;
 		this.myKey = initKeyEvent("./resources/Settings/Sokoban Key.xml");
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		setFocus();
-		
+		startStopMusic();
 		//here you give the focus with click on a mouse
 		this.SokobanDisplayer.addEventFilter(MouseEvent.MOUSE_CLICKED, (e)->SokobanDisplayer.requestFocus());
 		
@@ -79,14 +83,22 @@ public class MainWindowController extends Observable implements Initializable, i
 				String command=null;
 				if(event.getCode()==myKey.getUp())
 					command="move up";
-				if(event.getCode()==myKey.getDown())
+				else if(event.getCode()==myKey.getDown())
 					command="move down";
-				if(event.getCode()==myKey.getLeft())
+				else if(event.getCode()==myKey.getLeft())
 					command="move left";
-				if(event.getCode()==myKey.getRight())
+				else if(event.getCode()==myKey.getRight())
 					command="move right";
-				setChanged();
-				notifyObservers(command);
+				else
+				{
+					displayMassege("Invalid key");
+					command=null;
+				}
+				if (command!=null){
+					setChanged();
+					notifyObservers(command);
+				}
+				
 			}
 		});
 	}
@@ -121,6 +133,7 @@ public class MainWindowController extends Observable implements Initializable, i
 			Platform.runLater(new Runnable() {
 				@Override
 				public void run() {
+					stopTimer();
 					Alert alert =new Alert(AlertType.INFORMATION);
 					alert.setHeaderText("The level solved!!");
 					alert.setContentText("Time: "+ countTime+"\nSteps: "+ theLevel.getCountSteps());
@@ -174,9 +187,10 @@ public class MainWindowController extends Observable implements Initializable, i
 	}
 
 	public void openFile(){
+		this.fromCli=true;
 		FileChooser fc =new FileChooser();
 		fc.setTitle("open level");
-		fc.setInitialDirectory(new File("./resources"));
+		fc.setInitialDirectory(new File("./resources/levels"));
 		fc.getExtensionFilters().addAll(new ExtensionFilter("Text File", "*.txt"), new ExtensionFilter("XML File", "*.xml"), new ExtensionFilter("Object File", "*.obj"));
 		
 		File chosen = fc.showOpenDialog(null);
@@ -185,7 +199,7 @@ public class MainWindowController extends Observable implements Initializable, i
 			notifyObservers("load "+ chosen.getPath());
 			stopTimer();
 			startTimer();
-			startStopMusic();
+			
 		}
 	}
 	public void saveFile(){
@@ -202,26 +216,28 @@ public class MainWindowController extends Observable implements Initializable, i
 	}
 	@Override
 	public void displayLevel(Level2D theLevel) {
+		if (!fromCli){
+			startTimer();
+			//this.fromCli=true;
+		}
+			
 		this.SokobanDisplayer.setSokobanCol(theLevel.getSizeCol());
 		this.SokobanDisplayer.setSokobanRow(theLevel.getSizeRow());
 		this.SokobanDisplayer.setSokobanData(theLevel.getBoared());
-		//need to change position to twopoint
-		//this.SokobanDisplayer.setcCol(theLevel.getPosCharacter().getY());
-		//this.SokobanDisplayer.setcRow(theLevel.getPosCharacter().getX());
 		
 		ifsolved(theLevel);
 	}
 	@Override
 	public void displayExit() {
 		stopTimer();
-		if (this.music)
-			startStopMusic();
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Exit");
 		alert.setHeaderText("Are you sure you want to exit?");
 		Optional<ButtonType> result = alert.showAndWait();
 		
 		if (result.get() == ButtonType.OK){
+			if (this.music)
+				startStopMusic();
 		    setChanged();
 		    notifyObservers("exit");
 		    Platform.exit();

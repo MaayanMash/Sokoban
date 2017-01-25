@@ -4,6 +4,7 @@ package view;
 import java.util.List;
 
 import controller.SokobanController;
+import controller.generic.GenericController;
 import controller.server.SokobanClientHandler;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -43,7 +44,7 @@ public class Main extends Application
 			}
 
 			model.addObserver(sokobanController);
-			view.addObserver(sokobanController);	
+			view.addObserver(sokobanController);
 			view.setPrimaryStage(primaryStage);
 			
 			Scene scene = new Scene(root,800,600);
