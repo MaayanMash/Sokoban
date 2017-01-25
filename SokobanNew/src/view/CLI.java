@@ -15,7 +15,7 @@ import controller.generic.iCommand;
 
 
 public class CLI {
-	
+	/*
 	Level2D theLevel;
 	private HashMap<String, iCommand> hmCommands;
 	//try
@@ -24,7 +24,7 @@ public class CLI {
 	
 	//Def C'tor
 	public CLI() {
-		/*hmCommands= new HashMap<String, command>();
+		hmCommands= new HashMap<String, command>();
 		CommandLoad cl = new CommandLoad();
 		this.hmCommands.put("load",cl );
 		this.hmCommands.put("Load",cl );
@@ -40,7 +40,7 @@ public class CLI {
 		CommandExit ce =new CommandExit();
 		this.hmCommands.put("exit", ce);
 		this.hmCommands.put("Exit", ce);
-		*/
+		
 		hmCommands2= new HashMap<String, iCommand>();
 		this.hmCommands2.put("laod",new CommandLoad(str));
 	}
@@ -93,4 +93,6 @@ public class CLI {
 		System.out.println("To move - please write 'move up/down/right/left'");
 		System.out.println("To exit - please write 'exit'");
 	}
+	*/
 }
+		

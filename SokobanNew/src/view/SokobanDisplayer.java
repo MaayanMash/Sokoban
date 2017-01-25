@@ -172,23 +172,5 @@ public class SokobanDisplayer extends Canvas{
 		this.sokobanCol = sokobanCol;
 	}
 	
-	/*
-	public void setCharcterPos(char[][] sokobanData){
-		for (int i=0; i<this.cRow; i++)
-			for (int j=0; j<this.cCol; j++)
-				if (sokobanData[i][j]=='a' || sokobanData[i][j]=='A')
-				{
-					this.cRow=i;
-					this.cCol=j;
-				}
-		//redraw();
-		
-	}*/
-
-
-
-
-
-
 	
 }

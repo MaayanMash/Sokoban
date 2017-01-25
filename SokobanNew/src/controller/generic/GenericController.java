@@ -36,6 +36,8 @@ public class GenericController {
 	public void stop(){
 		this.stop=true;
 	}
+	
+	
 	public void insertCommand(iCommand c){
 		try {
 			commandQueue.put(c);

@@ -1,11 +1,15 @@
 package view;
 
+
+import java.beans.XMLDecoder;
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-import javax.print.attribute.standard.Media;
 import commons.Level2D;
 import java.util.Observable;
 import java.util.Optional;
@@ -14,25 +18,28 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.stage.FileChooser.ExtensionFilter;
-import javafx.stage.Popup;
-import javafx.scene.media.MediaPlayer;
+
 
 public class MainWindowController extends Observable implements Initializable, iView {
 	
 	@FXML private SokobanDisplayer SokobanDisplayer;
+	private Stage primaryStage;
+	private SokobanKeyEvent myKey;
 	
 	//timer
 	@FXML private Text SokobanTimer;
@@ -49,15 +56,19 @@ public class MainWindowController extends Observable implements Initializable, i
 	private MediaPlayer player;
 	private boolean music;
 	
+	//Ctor'
 	public MainWindowController() {
 		this.CounterTime=new SimpleStringProperty();
 		this.musicString=new File("./resources/music/Game Music.mp3").toURI().toString();
 		this.player=new MediaPlayer(new javafx.scene.media.Media(musicString));
 		this.music=false;
 		this.music=false;
+		this.myKey = initKeyEvent("./resources/Settings/Sokoban Key.xml");
 	}
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		setFocus();
+		
 		//here you give the focus with click on a mouse
 		this.SokobanDisplayer.addEventFilter(MouseEvent.MOUSE_CLICKED, (e)->SokobanDisplayer.requestFocus());
 		
@@ -66,19 +77,24 @@ public class MainWindowController extends Observable implements Initializable, i
 			@Override
 			public void handle(KeyEvent event) {
 				String command=null;
-				if(event.getCode()==KeyCode.UP)
+				if(event.getCode()==myKey.getUp())
 					command="move up";
-				if(event.getCode()==KeyCode.DOWN)
+				if(event.getCode()==myKey.getDown())
 					command="move down";
-				if(event.getCode()==KeyCode.LEFT)
+				if(event.getCode()==myKey.getLeft())
 					command="move left";
-				if(event.getCode()==KeyCode.RIGHT)
+				if(event.getCode()==myKey.getRight())
 					command="move right";
 				setChanged();
 				notifyObservers(command);
 			}
 		});
 	}
+	public void setPrimaryStage(Stage primaryStage){
+		this.primaryStage=primaryStage;
+		exitPrimaryStage();
+	}
+	
 	@Override
 	public void createBindSteps(StringProperty Counter){
 		this.SokobanSteps.textProperty().bind(Counter);
@@ -107,7 +123,7 @@ public class MainWindowController extends Observable implements Initializable, i
 				public void run() {
 					Alert alert =new Alert(AlertType.INFORMATION);
 					alert.setHeaderText("The level solved!!");
-					alert.setContentText("Time: "+ countTime+ "  "+"Steps: "+ theLevel.getCountSteps());
+					alert.setContentText("Time: "+ countTime+"\nSteps: "+ theLevel.getCountSteps());
 					alert.show();
 					stopTimer();
 				}
@@ -167,7 +183,6 @@ public class MainWindowController extends Observable implements Initializable, i
 		if(chosen != null){
 			setChanged();
 			notifyObservers("load "+ chosen.getPath());
-			setFocus();
 			stopTimer();
 			startTimer();
 			startStopMusic();
@@ -204,8 +219,8 @@ public class MainWindowController extends Observable implements Initializable, i
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Exit");
 		alert.setHeaderText("Are you sure you want to exit?");
-
 		Optional<ButtonType> result = alert.showAndWait();
+		
 		if (result.get() == ButtonType.OK){
 		    setChanged();
 		    notifyObservers("exit");
@@ -229,7 +244,38 @@ public class MainWindowController extends Observable implements Initializable, i
 		});
 		
 	}
+	public void exitPrimaryStage(){
+		this.primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 
+			@Override
+			public void handle(WindowEvent event) {
+				setChanged();
+				notifyObservers("exit");
+				
+			}
+			
+		});
+	}
+	
+	private SokobanKeyEvent initKeyEvent(String path){
+ 		XMLDecoder xmlDecoder;
+ 		SokobanKeyEvent sokobanKey = null;
+ 		
+ 		try {
+			xmlDecoder = new XMLDecoder(new BufferedInputStream(new FileInputStream(new File(path))));
+	 		sokobanKey = (SokobanKeyEvent) xmlDecoder.readObject();
+	 		xmlDecoder.close();
+
+		} 
+ 		catch (FileNotFoundException e) {
+			e.printStackTrace();
+			setChanged();
+			notifyObservers("DisplayMassege Wrong file KeyEvent input ");
+		}
+ 		
+ 		return sokobanKey;
+	}
+ 	
 
 
 
